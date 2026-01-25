@@ -1,5 +1,6 @@
-<h1>Trang Home</h1>
+<h1>Xin chào {{ auth()->user()->name }}</h1>
 
-<a href="{{ route('product.index') }}">
-    Đi tới danh sách sản phẩm
-</a>
+<form method="POST" action="/logout">
+    @csrf
+    <button type="submit">Đăng xuất</button>
+</form>
