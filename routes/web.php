@@ -1,18 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AgeController;
 
-// ===== FORM =====
-Route::get('/register', [AuthController::class, 'showRegister']);
-Route::get('/login', [AuthController::class, 'showLogin']);
+Route::get('/age', [AgeController::class, 'showForm']);
+Route::post('/age', [AgeController::class, 'store']);
 
-// ===== XỬ LÝ =====
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout']);
-
-// ===== HOME (BẢO VỆ) =====
-Route::get('/home', function () {
-    return view('home');
-})->middleware('auth');
+Route::get('/dashboard', function () {
+    return 'Chào mừng bạn vào Dashboard 🎉';
+})->middleware('check.age');
