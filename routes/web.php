@@ -3,31 +3,34 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
 | Public Routes
 |--------------------------------------------------------------------------
 */
+
 Route::get('/', function () {
     return view('welcome');
 });
 
 /*
 |--------------------------------------------------------------------------
-| Dashboard
-|--------------------------------------------------------------------------
-*/
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-/*
-|--------------------------------------------------------------------------
 | Authenticated Routes
 |--------------------------------------------------------------------------
 */
-Route::middleware('auth')->group(function () {
+
+Route::middleware(['auth', 'verified'])->group(function () {
+
+    /*
+    |-----------------------------
+    | Dashboard
+    |-----------------------------
+    */
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 
     /*
     |-----------------------------
@@ -44,6 +47,13 @@ Route::middleware('auth')->group(function () {
     |-----------------------------
     */
     Route::resource('products', ProductController::class);
+
+    /*
+    |-----------------------------
+    | Categories CRUD
+    |-----------------------------
+    */
+    Route::resource('categories', CategoryController::class);
 });
 
 /*
